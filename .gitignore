@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+*.db
+*.sqlite
+*.sqlite3
+finance_data.db
+.streamlit/secrets.toml
+.pytest_cache/
+.DS_Store
