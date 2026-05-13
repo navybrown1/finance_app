@@ -1,0 +1,14 @@
+services:
+  finance-app:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      FINANCE_APP_DATA_DIR: /data
+      FINANCE_APP_DB_PATH: /data/finance_data.db
+    volumes:
+      - finance_app_data:/data
+    restart: unless-stopped
+
+volumes:
+  finance_app_data:
