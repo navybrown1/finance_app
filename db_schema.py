@@ -16,7 +16,7 @@ def _pk() -> str:
 def init_tables(db_path=None) -> None:
     pk = _pk()
     with engine(db_path).begin() as conn:
-        conn.execute(text(f"CREATE TABLE IF NOT EXISTS users_app (id {pk}, username TEXT UNIQUE NOT NULL, access_hash TEXT NOT NULL, role TEXT NOT NULL CHECK(role IN ('admin','coach')), created_at TEXT DEFAULT CURRENT_TIMESTAMP)"))
+        conn.execute(text(f"CREATE TABLE IF NOT EXISTS users_app (id {pk}, username TEXT UNIQUE NOT NULL, key_digest TEXT NOT NULL, role TEXT NOT NULL CHECK(role IN ('admin','coach')), created_at TEXT DEFAULT CURRENT_TIMESTAMP)"))
         conn.execute(text(f"CREATE TABLE IF NOT EXISTS budget_categories (id {pk}, name TEXT NOT NULL, type TEXT NOT NULL CHECK(type IN ('income','expense')), allocated FLOAT NOT NULL DEFAULT 0, month TEXT NOT NULL, UNIQUE(name, month))"))
         conn.execute(text(f"CREATE TABLE IF NOT EXISTS transactions_app (id {pk}, date TEXT NOT NULL, description TEXT NOT NULL, amount FLOAT NOT NULL, category_id INTEGER, account_number TEXT, raw_data TEXT, source TEXT DEFAULT 'manual', month TEXT NOT NULL)"))
         conn.execute(text(f"CREATE TABLE IF NOT EXISTS business_ledger (id {pk}, date TEXT NOT NULL, description TEXT NOT NULL, category TEXT NOT NULL, type TEXT NOT NULL CHECK(type IN ('revenue','expense')), amount FLOAT NOT NULL, month TEXT NOT NULL)"))
