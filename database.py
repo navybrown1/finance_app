@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import os
 from datetime import date
 from pathlib import Path
 
@@ -10,6 +9,7 @@ from db_business import add_business_entry, delete_business_entry, get_business_
 from db_constants import BUSINESS_CATEGORIES, DEFAULT_CATEGORIES
 from db_people import authenticate_user, create_user
 from db_schema import init_tables, seed_categories
+from db_security import hash_password, verify_password
 from db_state import engine
 
 
